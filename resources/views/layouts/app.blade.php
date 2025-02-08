@@ -47,6 +47,65 @@
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Check for Session Message -->
+@if(session('success'))
+    <script>
+        Swal.fire({
+            title: "Success!",
+            text: "{{ session('success') }}",
+            icon: "success",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
+
+@if(session('error'))
+    <script>
+        Swal.fire({
+            title: "Error!",
+            text: "{{ session('error') }}",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
+
+@if(session('warning'))
+    <script>
+        Swal.fire({
+            title: "Warning!",
+            text: "{{ session('warning') }}",
+            icon: "warning",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
+
+@if(session('info'))
+    <script>
+        Swal.fire({
+            title: "Information",
+            text: "{{ session('info') }}",
+            icon: "info",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
+
+@if(session('delete'))
+    <script>
+        Swal.fire({
+            title: "Deleted!",
+            text: "{{ session('delete') }}",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
+
 
     <!-- Page CSS -->
 

@@ -9,14 +9,14 @@ id="layout-navbar">
 
 <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
   <!-- Search -->
-  <div class="navbar-nav align-items-center">
+  {{-- <div class="navbar-nav align-items-center">
     <div class="nav-item navbar-search-wrapper mb-0">
       <a class="nav-item nav-link search-toggler d-flex align-items-center px-0" href="javascript:void(0);">
         <i class="ti ti-search ti-md me-2 me-lg-4 ti-lg"></i>
         <span class="d-none d-md-inline-block text-muted fw-normal">Search (Ctrl+/)</span>
       </a>
     </div>
-  </div>
+  </div> --}}
   <!-- /Search -->
 
   <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -450,7 +450,7 @@ id="layout-navbar">
                 </div>
               </div>
               <div class="flex-grow-1">
-                <h6 class="mb-0">John Doe</h6>
+                <h6 class="mb-0">{{ Auth::user()->name }}</h6>
                 <small class="text-muted">Admin</small>
               </div>
             </div>
@@ -569,137 +569,10 @@ id="layout-navbar">
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-      <!-- Dashboards -->
-      {{-- <li class="menu-item active open">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons ti ti-smart-home"></i>
-          <div data-i18n="Dashboards">Dashboards</div>
-          <div class="badge bg-danger rounded-pill ms-auto">5</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="index.html" class="menu-link">
-              <div data-i18n="Analytics">Analytics</div>
-            </a>
-          </li>
-          <li class="menu-item active">
-            <a href="dashboards-crm.html" class="menu-link">
-              <div data-i18n="CRM">CRM</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="app-ecommerce-dashboard.html" class="menu-link">
-              <div data-i18n="eCommerce">eCommerce</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="app-logistics-dashboard.html" class="menu-link">
-              <div data-i18n="Logistics">Logistics</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="app-academy-dashboard.html" class="menu-link">
-              <div data-i18n="Academy">Academy</div>
-            </a>
-          </li>
-        </ul>
-      </li> --}}
 
-      {{-- <!-- Layouts -->
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-          <div data-i18n="Layouts">Layouts</div>
-        </a>
 
-        <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="layouts-collapsed-menu.html" class="menu-link">
-              <div data-i18n="Collapsed menu">Collapsed menu</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-content-navbar.html" class="menu-link">
-              <div data-i18n="Content navbar">Content navbar</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
-              <div data-i18n="Content nav + Sidebar">Content nav + Sidebar</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="../horizontal-menu-template" class="menu-link" target="_blank">
-              <div data-i18n="Horizontal">Horizontal</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-without-menu.html" class="menu-link">
-              <div data-i18n="Without menu">Without menu</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-without-navbar.html" class="menu-link">
-              <div data-i18n="Without navbar">Without navbar</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-fluid.html" class="menu-link">
-              <div data-i18n="Fluid">Fluid</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-container.html" class="menu-link">
-              <div data-i18n="Container">Container</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-blank.html" class="menu-link">
-              <div data-i18n="Blank">Blank</div>
-            </a>
-          </li>
-        </ul>
-      </li> --}}
+      @if (Auth::user()->user_type == 1)
 
-      <!-- Front Pages -->
-      {{-- <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons ti ti-files"></i>
-          <div data-i18n="Front Pages">Front Pages</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
-              <div data-i18n="Landing">Landing</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="../front-pages/pricing-page.html" class="menu-link" target="_blank">
-              <div data-i18n="Pricing">Pricing</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="../front-pages/payment-page.html" class="menu-link" target="_blank">
-              <div data-i18n="Payment">Payment</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="../front-pages/checkout-page.html" class="menu-link" target="_blank">
-              <div data-i18n="Checkout">Checkout</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="../front-pages/help-center-landing.html" class="menu-link" target="_blank">
-              <div data-i18n="Help Center">Help Center</div>
-            </a>
-          </li>
-        </ul>
-      </li> --}}
-
-      <!-- Apps & Pages -->
-      {{-- <li class="menu-header small">
-        <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
-      </li> --}}
       <li class="menu-item">
         <a href="{{ url('admin/dashbaord')}}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-desktop"></i>
@@ -707,9 +580,54 @@ id="layout-navbar">
         </a>
       </li>
       <li class="menu-item">
-        <a href="app-chat.html" class="menu-link">
+        <a href="{{ url('admin/admin/list')}}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-user-circle"></i>
           <div data-i18n="Admin">Admin</div>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="{{ url('admin/class/list')}}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-book"></i>
+
+          <div data-i18n="class">class</div>
+        </a>
+      </li>
+@elseif (Auth::user()->user_type == 2)
+
+<li class="menu-item">
+    <a href="{{ url('teacher/dashbaord')}}" class="menu-link">
+      <i class="menu-icon tf-icons ti ti-device-desktop"></i>
+      <div data-i18n="Dashboard">Dashboard</div>
+    </a>
+  </li>
+
+@elseif (Auth::user()->user_type == 3)
+
+<li class="menu-item">
+    <a href="{{ url('student/dashbaord')}}" class="menu-link">
+      <i class="menu-icon tf-icons ti ti-device-desktop"></i>
+      <div data-i18n="Dashboard">Dashboard</div>
+    </a>
+  </li>
+
+
+@elseif (Auth::user()->user_type == 4)
+
+<li class="menu-item">
+    <a href="{{ url('parent/dashbaord')}}" class="menu-link">
+      <i class="menu-icon tf-icons ti ti-device-desktop"></i>
+      <div data-i18n="Dashboard">Dashboard</div>
+    </a>
+  </li>
+@endif
+
+
+
+      <li class="menu-item">
+        <a href="{{ url('logout')}}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-logout"></i>
+          <div data-i18n="Logout">Logout</div>
         </a>
       </li>
 

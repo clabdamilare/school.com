@@ -4,152 +4,146 @@
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
 
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <div class="card">
-        <h5 class="card-header">admin list</h5>
-        <div class="table-responsive text-nowrap">
-          <table class="table">
+<!-- Check for Session Message -->
+@if(session('success'))
+    <script>
+        Swal.fire({
+            title: "Success!",
+            text: "{{ session('success') }}",
+            icon: "success",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
+
+<div class="card mb-6">  <!-- Add mb-4 for spacing -->
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-header m-0">Admin List (Total : {{ $getRecord->total() }})</h5>
+        <a href="{{ url('admin/admin/add')}}" class="btn btn-primary btn-md me-6">
+            <span class="ti-xs ti ti-star me-1"></span>Add New Admin
+        </a>
+    </div>
+</div>  <!-- Closing first card -->
+
+<!-- Add margin-bottom to create space between form and table -->
+<div class="card mb-4 custom-card">
+    <!-- Search Heading -->
+    <div class="card-header">
+        <h5 class="m-0">Search Admin</h5> <!-- Adjust the text as needed -->
+    </div>
+
+    <div class="card-body">
+        <form method="GET" action="{{ url('admin/admin/list') }}">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3 col-sm-4 fv-plugins-icon-container ms-3">
+                        <label class="form-label" for="formValidationUsername">Username</label>
+                        <input type="text" name="name" id="formValidationUsername"
+                               value="{{ Request::get('name') }}" class="form-control" placeholder="search username">
+                    </div>
+
+                    <div class="col-md-3 col-sm-4 fv-plugins-icon-container ms-3">
+                        <label class="form-label" for="formValidationEmail">Email</label>
+                        <input type="text" name="email" id="formValidationEmail"
+                               value="{{ Request::get('email') }}" class="form-control" placeholder="search email">
+                    </div>
+
+                    <div class="col-md-3 col-sm-4 fv-plugins-icon-container ms-3">
+                        <label class="form-label" for="formValidationDate">Date</label>
+                        <input type="date" name="date" id="formValidationDate"
+                               value="{{ Request::get('date') }}" class="form-control" placeholder="search date">
+                    </div>
+
+                    <div class="col-md-2 col-auto d-flex gap-2 ms-3">
+                        <button type="submit" class="btn btn-info btn-sm">Search</button>
+                        <a href="{{ url('admin/admin/list') }}" class="btn btn-dark btn-sm">Reset</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+ <!-- End of Form Card -->
+
+
+<style>
+.custom-card {
+
+    min-height: 80px; /* Adjust height as needed */
+    margin: 0 auto; /* Centers it */
+}
+</style>
+
+
+<!-- Table Section -->
+<div class="card">
+    <div class="table-responsive text-nowrap">
+        <table class="table">
             <thead>
-              <tr>
-                <th>Project</th>
-                <th>Client</th>
-                <th>Users</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Create at</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-              <tr>
-                <td>
-                  <i class="ti ti-brand-angular ti-md text-danger me-4"></i>
-                  <span class="fw-medium">Angular Project</span>
-                </td>
-                <td>Albert Cook</td>
-                <td>
-                  <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                      <img src="{{asset('backend/')}}assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                      <img src="{{asset('backend/')}}assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                      <img src="{{asset('backend/')}}assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                  </ul>
-                </td>
-                <td><span class="badge bg-label-primary me-1">Active</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                      <i class="ti ti-dots-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-pencil me-1"></i> Edit</a>
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-trash me-1"></i> Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <i class="ti ti-brand-react-native ti-md text-info me-4"></i>
-                  <span class="fw-medium">React Project</span>
-                </td>
-                <td>Barry Hunter</td>
-                <td>
-                  <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                      <img src="{{asset('backend/')}}assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                      <img src="{{asset('backend/')}}assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                      <img src="{{asset('backend/')}}assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                  </ul>
-                </td>
-                <td><span class="badge bg-label-success me-1">Completed</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                      <i class="ti ti-dots-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-pencil me-2"></i> Edit</a>
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-trash me-2"></i> Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <i class="ti ti-brand-vue ti-md text-success me-4"></i>
-                  <span class="fw-medium">VueJs Project</span>
-                </td>
-                <td>Trevor Baker</td>
-                <td>
-                  <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                      <img src="{{asset('backend/')}}assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                      <img src="{{asset('backend/')}}assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                      <img src="{{asset('backend/')}}assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                  </ul>
-                </td>
-                <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                      <i class="ti ti-dots-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-pencil me-2"></i> Edit</a>
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-trash me-2"></i> Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <i class="ti ti-brand-bootstrap ti-md text-primary me-4"></i>
-                  <span class="fw-medium">Bootstrap Project</span>
-                </td>
-                <td>Jerry Milton</td>
-                <td>
-                  <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                      <img src="{{asset('backend/')}}assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                      <img src="{{asset('backend/')}}assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                      <img src="{{asset('backend/')}}assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                    </li>
-                  </ul>
-                </td>
-                <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                      <i class="ti ti-dots-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-pencil me-2"></i> Edit</a>
-                      <a class="dropdown-item waves-effect" href="javascript:void(0);"><i class="ti ti-trash me-2"></i> Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                @foreach($getRecord as $value)
+                <tr>
+                    <td>
+                        @php
+                            $icons = [
+                                'admin' => 'ti-shield-lock',
+                                'teacher' => 'ti-shield-lock',
+                                'student' => 'ti-shield-lock',
+                                'user' => 'ti-shield-lock',
+                            ];
+                            $role = strtolower($value->name);
+                            $iconClass = $icons[$role] ?? 'ti-shield-lock';
+                        @endphp
+
+                        <i class="ti {{ $iconClass }} ti-md text-primary me-4"></i>
+                        <span class="fw-medium">{{ $value->name }}</span>
+                    </td>
+                    <td>{{ $value->email }}</td>
+                    <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
+                    <td><span class="badge bg-label-primary me-1">Active</span></td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item waves-effect" href="{{ url('admin/admin/edit/' . $value->id) }}">
+                                    <i class="ti ti-pencil me-1"></i> Edit
+                                </a>
+                                <form action="{{ url('admin/admin/delete/' . $value->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="dropdown-item waves-effect" onclick="return confirm('Are you sure you want to delete this admin?');">
+                                        <i class="ti ti-trash me-1"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
             </tbody>
-          </table>
+        </table>
+
+        <div style="padding: 30px; float: right;">
+            {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
         </div>
+    </div>
+</div>
+
       </div>
 
 @endsection

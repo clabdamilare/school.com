@@ -75,7 +75,7 @@
 
 
                    @include('_message')
-                    <form action="{{ url('login')}}" method="post" id="formAuthentication" class="mb-6 fv-plugins-bootstrap5 fv-plugins-framework" action="index.html" method="GET" novalidate="novalidate">
+                    <form action="{{ url('login')}}" method="post" id="formAuthentication" class="mb-6 fv-plugins-bootstrap5 fv-plugins-framework" action="index.html" novalidate="novalidate">
                         {{  csrf_field() }}
                         <div class="mb-6 fv-plugins-icon-container">
                         <label for="email" class="form-label">Email or Username</label>
