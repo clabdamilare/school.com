@@ -65,9 +65,9 @@
 
 <div class="card mb-6">  <!-- Add mb-4 for spacing -->
     <div class="d-flex justify-content-between align-items-center">
-        <h5 class="card-header m-0">Class List </h5>
-        <a href="{{ url('admin/class/add')}}" class="btn btn-primary btn-md me-6">
-            <span class="ti-xs ti ti-star me-1"></span>Add New Class
+        <h5 class="card-header m-0">Subject List </h5>
+        <a href="{{ url('admin/subject/add')}}" class="btn btn-primary btn-md me-6">
+            <span class="ti-xs ti ti-star me-1"></span>Add New Subject
         </a>
     </div>
 </div>  <!-- Closing first card -->
@@ -76,31 +76,40 @@
 <div class="card mb-4 custom-card">
     <!-- Search Heading -->
     <div class="card-header">
-        <h5 class="m-0">Search Class</h5> <!-- Adjust the text as needed -->
+        <h5 class="m-0">Search Subject</h5> <!-- Adjust the text as needed -->
     </div>
 
     <div class="card-body">
-        <form method="GET" action="{{ url('admin/class/list') }}">
+        <form method="GET" action="{{ url('admin/subject/list') }}">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="row g-3 align-items-end">
                     <div class="col-md-3 col-sm-4 fv-plugins-icon-container ms-3">
                         <label class="form-label" for="formValidationUsername">Username</label>
                         <input type="text" name="name" id="formValidationUsername"
-                               value="{{ Request::get('name') }}" class="form-control" placeholder="search username">
+                               value="{{ Request::get('name') }}" class="form-control" placeholder="Search Username">
                     </div>
 
+                    <div class="col-md-3 col-sm-4 fv-plugins-icon-container ms-3">
+                        <label class="form-label" for="subjectType">Subject Type</label>
+                        <select id="formtabs-country" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" data-select2-id="formtabs-country" tabindex="-1" aria-hidden="true" name="type" id="subjectType">
+                            <option value="">Select Subject</option>
+                            <option value="Theory" {{ (Request::get('type') == 'Theory') ? ' selected' : '' }}>Theory</option>
+                            <option value="Practical" {{ (Request::get('type') == 'Practical') ? ' selected' : '' }}>Practical</option>
+                        </select>
+                    </div>
 
                     <div class="col-md-3 col-sm-4 fv-plugins-icon-container ms-3">
                         <label class="form-label" for="formValidationDate">Date</label>
                         <input type="date" name="date" id="formValidationDate"
-                               value="{{ Request::get('date') }}" class="form-control" placeholder="search date">
+                               value="{{ Request::get('date') }}" class="form-control" placeholder="Search Date">
                     </div>
 
                     <div class="col-md-2 col-auto d-flex gap-2 ms-3">
                         <button type="submit" class="btn btn-info btn-sm custom-btn-width">Search</button>
-                        <a href="{{ url('admin/class/list') }}" class="btn btn-dark btn-sm custom-btn-width">Reset</a>
+                        <a href="{{ url('admin/subject/list') }}" class="btn btn-dark btn-sm custom-btn-width">Reset</a>
                     </div>
                 </div>
+
             </div>
         </form>
 
@@ -108,6 +117,11 @@
 
 </div>
  <!-- End of Form Card -->
+ <style>
+    .custom-btn-width {
+        width: 130px; /* Adjust as needed */
+    }
+</style>
 
 
 <style>
@@ -117,11 +131,7 @@
     margin: 0 auto; /* Centers it */
 }
 </style>
-<style>
-    .custom-btn-width {
-        width: 130px; /* Adjust as needed */
-    }
-</style>
+
 
 <!-- Table Section -->
 <div class="card">
@@ -130,7 +140,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Subject Name</th>
+                    <th>Subject Type</th>
                     <th>Status</th>
                     <th>Created By</th>
                     <th>Created Date</th>
@@ -143,6 +154,7 @@
                     <tr>
                         <td>{{ $value->id }}</td>
                         <td>{{ $value->name }}</td>
+                        <td>{{ $value->type }}</td>
                         <td>
                             @if($value->status == 0)
                             Active
@@ -158,13 +170,13 @@
                                     <i class="ti ti-dots-vertical"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item waves-effect" href="{{ url('admin/class/edit/' . $value->id) }}">
+                                    <a class="dropdown-item waves-effect" href="{{ url('admin/subject/edit/' . $value->id) }}">
                                         <i class="ti ti-pencil me-1"></i> Edit
                                     </a>
-                                    <form action="{{ url('admin/class/delete/' . $value->id) }}" method="POST" style="display: inline;">
+                                    <form action="{{ url('admin/subject/delete/' . $value->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="dropdown-item waves-effect" onclick="return confirm('Are you sure you want to delete this admin?');">
+                                        <button type="submit" class="dropdown-item waves-effect" onclick="return confirm('Are you sure you want to delete this subject?');">
                                             <i class="ti ti-trash me-1"></i> Delete
                                         </button>
                                     </form>
@@ -182,6 +194,7 @@
         </div>
     </div>
 </div>
+
       </div>
 
 @endsection

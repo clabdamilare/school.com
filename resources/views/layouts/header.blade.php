@@ -579,24 +579,43 @@ id="layout-navbar">
           <div data-i18n="Dashboard">Dashboard</div>
         </a>
       </li>
+
       <li class="menu-item">
-        <a href="{{ url('admin/admin/list')}}" class="menu-link">
+        <a href="{{ url('admin/admin/list')}}" class="menu-link @if(Request::segment(2) == 'admin') active @endif">
           <i class="menu-icon tf-icons ti ti-user-circle"></i>
           <div data-i18n="Admin">Admin</div>
         </a>
       </li>
 
       <li class="menu-item">
-        <a href="{{ url('admin/class/list')}}" class="menu-link">
+        <a href="{{ url('admin/class/list')}}" class="menu-link @if(Request::segment(2) == 'class') active @endif">
             <i class="menu-icon tf-icons ti ti-book"></i>
 
           <div data-i18n="class">class</div>
         </a>
       </li>
+
+      <li class="menu-item">
+        <a href="{{ url('admin/subject/list')}}" class="menu-link @if(Request::segment(2) == 'subject') active @endif">
+            <i class="menu-icon tf-icons ti ti-book"></i>
+
+          <div data-i18n="subject">subject</div>
+        </a>
+      </li>
+
+ <li class="menu-item">
+        <a href="{{ url('admin/assign_subject/list')}}" class="menu-link @if(Request::segment(2) == 'assign_subject') active @endif">
+            <i class="menu-icon tf-icons ti ti-book"></i>
+
+          <div data-i18n="Assign subject">Assign subject</div>
+        </a>
+      </li>
+
+
 @elseif (Auth::user()->user_type == 2)
 
 <li class="menu-item">
-    <a href="{{ url('teacher/dashbaord')}}" class="menu-link">
+    <a href="{{ url('teacher/dashbaord')}}" class="menu-link @if(Request::segment(2) == 'dashbaord') active @endif">
       <i class="menu-icon tf-icons ti ti-device-desktop"></i>
       <div data-i18n="Dashboard">Dashboard</div>
     </a>
@@ -605,7 +624,7 @@ id="layout-navbar">
 @elseif (Auth::user()->user_type == 3)
 
 <li class="menu-item">
-    <a href="{{ url('student/dashbaord')}}" class="menu-link">
+    <a href="{{ url('student/dashbaord')}}" class="menu-link @if(Request::segment(2) == 'dashbaord') active @endif">
       <i class="menu-icon tf-icons ti ti-device-desktop"></i>
       <div data-i18n="Dashboard">Dashboard</div>
     </a>
@@ -615,7 +634,7 @@ id="layout-navbar">
 @elseif (Auth::user()->user_type == 4)
 
 <li class="menu-item">
-    <a href="{{ url('parent/dashbaord')}}" class="menu-link">
+    <a href="{{ url('parent/dashbaord')}}" class="menu-link @if(Request::segment(2) == 'dashbaord') active @endif">
       <i class="menu-icon tf-icons ti ti-device-desktop"></i>
       <div data-i18n="Dashboard">Dashboard</div>
     </a>

@@ -69,7 +69,7 @@ public function delete($id)
     $save->is_delete = 1;
     $save->save();
 
-    return redirect()->back()->with('error', "Class Successfully Deleted");
+    return redirect()->back()->with('info', "Class Successfully Deleted");
 }
         }
 
