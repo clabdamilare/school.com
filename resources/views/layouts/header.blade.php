@@ -464,11 +464,34 @@ id="layout-navbar">
             <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">My Profile</span>
           </a>
         </li>
+
+
         <li>
-          <a class="dropdown-item" href="pages-account-settings-account.html">
-            <i class="ti ti-settings me-3 ti-md"></i><span class="align-middle">Settings</span>
-          </a>
+            @php
+                // Determine the correct settings URL based on user type
+                $userType = Auth::user()->user_type;
+                $settingsUrl = '';
+
+                if ($userType == 1) {
+                    $settingsUrl = route('admin/settings');
+                } elseif ($userType == 2) {
+                    $settingsUrl = route('teacher/settings');
+                } elseif ($userType == 3) {
+                    $settingsUrl = route('student/settings');
+                } elseif ($userType == 4) {
+                    $settingsUrl = route('parent/settings');
+                }
+            @endphp
+
+            <a class="dropdown-item" href="{{ $settingsUrl }}">
+                <i class="ti ti-settings me-3 ti-md"></i>
+                <span class="align-middle">Settings</span>
+            </a>
         </li>
+
+
+
+
         <li>
           <a class="dropdown-item" href="pages-account-settings-billing.html">
             <span class="d-flex align-items-center align-middle">
@@ -495,7 +518,7 @@ id="layout-navbar">
         </li>
         <li>
           <div class="d-grid px-2 pt-2 pb-1">
-            <a class="btn btn-sm btn-danger d-flex" href="auth-login-cover.html" target="_blank">
+            <a class="btn btn-sm btn-danger d-flex" href="{{ url('logout')}}" target="_blank">
               <small class="align-middle">Logout</small>
               <i class="ti ti-logout ms-2 ti-14px"></i>
             </a>
@@ -574,11 +597,12 @@ id="layout-navbar">
       @if (Auth::user()->user_type == 1)
 
       <li class="menu-item">
-        <a href="{{ url('admin/dashbaord')}}" class="menu-link">
+        <a href="{{ url('admin/dashboard')}}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-desktop"></i>
           <div data-i18n="Dashboard">Dashboard</div>
         </a>
       </li>
+
 
       <li class="menu-item">
         <a href="{{ url('admin/admin/list')}}" class="menu-link @if(Request::segment(2) == 'admin') active @endif">
@@ -587,9 +611,39 @@ id="layout-navbar">
         </a>
       </li>
 
+        <li class="menu-item">
+        <a href="{{ url('admin/teacher/list')}}" class="menu-link @if(Request::segment(2) == 'teacher') active @endif">
+          <i class="menu-icon tf-icons ti ti-user-circle"></i>
+          <div data-i18n="teacher">Teacher</div>
+        </a>
+      </li>
+
+      {{-- you can still uncomment to get My Account list at sidebar  --}}
+      {{-- <li class="menu-item">
+        <a href="{{ url('admin/account')}}" class="menu-link @if(Request::segment(2) == 'account') active @endif">
+          <i class="menu-icon tf-icons ti ti-device-desktop"></i>
+          <div data-i18n="My Account">My Account</div>
+        </a>
+      </li> --}}
+
+      <li class="menu-item">
+        <a href="{{ url('admin/student/list')}}" class="menu-link @if(Request::segment(2) == 'student') active @endif">
+          <i class="menu-icon tf-icons ti ti-backpack"></i>
+          <div data-i18n="Student">Student</div>
+        </a>
+      </li>
+
+
+      <li class="menu-item">
+        <a href="{{ url('admin/parent/list')}}" class="menu-link @if(Request::segment(2) == 'parent') active @endif">
+          <i class="menu-icon tf-icons ti ti-user-heart"></i>
+          <div data-i18n="Parent">Parent</div>
+        </a>
+      </li>
+
       <li class="menu-item">
         <a href="{{ url('admin/class/list')}}" class="menu-link @if(Request::segment(2) == 'class') active @endif">
-            <i class="menu-icon tf-icons ti ti-book"></i>
+            <i class="menu-icon tf-icons ti ti-school"></i>
 
           <div data-i18n="class">class</div>
         </a>
@@ -605,11 +659,22 @@ id="layout-navbar">
 
  <li class="menu-item">
         <a href="{{ url('admin/assign_subject/list')}}" class="menu-link @if(Request::segment(2) == 'assign_subject') active @endif">
-            <i class="menu-icon tf-icons ti ti-book"></i>
+            <i class="menu-icon tf-icons ti ti-file-pencil"></i>
 
           <div data-i18n="Assign subject">Assign subject</div>
         </a>
       </li>
+
+      {{-- the change password side bar list you can uncommment if you want to still use --}}
+
+      {{-- <li class="menu-item">
+        <a href="{{ url('admin/change_password')}}" class="menu-link @if(Request::segment(2) == 'change_password') active @endif">
+            <i class="menu-icon tf-icons ti ti-book"></i>
+
+          <div data-i18n="Change Password">change_password</div>
+        </a>
+      </li> --}}
+
 
 
 @elseif (Auth::user()->user_type == 2)
@@ -621,6 +686,24 @@ id="layout-navbar">
     </a>
   </li>
 
+   {{-- you can still uncomment to get My Account list at sidebar  --}}
+  {{-- <li class="menu-item">
+    <a href="{{ url('teacher/account')}}" class="menu-link @if(Request::segment(2) == 'account') active @endif">
+      <i class="menu-icon tf-icons ti ti-device-desktop"></i>
+      <div data-i18n="My Account">My Account</div>
+    </a>
+  </li> --}}
+
+  {{-- the change password side bar list you can uncommment if you want to still use --}}
+
+  {{-- <li class="menu-item">
+    <a href="{{ url('teacher/change_password')}}" class="menu-link @if(Request::segment(2) == 'change_password') active @endif">
+        <i class="menu-icon tf-icons ti ti-book"></i>
+
+      <div data-i18n="Change Password">Change Password</div>
+    </a>
+  </li> --}}
+
 @elseif (Auth::user()->user_type == 3)
 
 <li class="menu-item">
@@ -631,6 +714,25 @@ id="layout-navbar">
   </li>
 
 
+   {{-- you can still uncomment to get My Account list at sidebar  --}}
+  {{-- <li class="menu-item">
+    <a href="{{ url('student/account')}}" class="menu-link @if(Request::segment(2) == 'account') active @endif">
+      <i class="menu-icon tf-icons ti ti-device-desktop"></i>
+      <div data-i18n="My Account">My Account</div>
+    </a>
+  </li> --}}
+
+  {{-- the change password side bar list you can uncommment if you want to still use --}}
+
+  {{-- <li class="menu-item">
+    <a href="{{ url('student/change_password')}}" class="menu-link @if(Request::segment(2) == 'change_password') active @endif">
+        <i class="menu-icon tf-icons ti ti-book"></i>
+
+      <div data-i18n="Change Password">change_password</div>
+    </a>
+  </li> --}}
+
+
 @elseif (Auth::user()->user_type == 4)
 
 <li class="menu-item">
@@ -639,6 +741,24 @@ id="layout-navbar">
       <div data-i18n="Dashboard">Dashboard</div>
     </a>
   </li>
+
+   {{-- you can still uncomment to get My Account list at sidebar  --}}
+  {{-- <li class="menu-item">
+    <a href="{{ url('parent/account')}}" class="menu-link @if(Request::segment(2) == 'account') active @endif">
+      <i class="menu-icon tf-icons ti ti-device-desktop"></i>
+      <div data-i18n="My Account">My Account</div>
+    </a>
+  </li> --}}
+
+  {{-- the change password side bar list you can uncommment if you want to still use --}}
+
+  {{-- <li class="menu-item">
+    <a href="{{ url('parent/change_password')}}" class="menu-link @if(Request::segment(2) == 'change_password') active @endif">
+        <i class="menu-icon tf-icons ti ti-book"></i>
+
+      <div data-i18n="Change Password">change_password</div>
+    </a>
+  </li> --}}
 @endif
 
 

@@ -86,6 +86,7 @@
         <table class="table">
             <thead>
                 <tr>
+                <th>#</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Create at</th>
@@ -96,24 +97,17 @@
             <tbody class="table-border-bottom-0">
                 @foreach($getRecord as $value)
                 <tr>
-                    <td>
-                        @php
-                            $icons = [
-                                'admin' => 'ti-shield-lock',
-                                'teacher' => 'ti-shield-lock',
-                                'student' => 'ti-shield-lock',
-                                'user' => 'ti-shield-lock',
-                            ];
-                            $role = strtolower($value->name);
-                            $iconClass = $icons[$role] ?? 'ti-shield-lock';
-                        @endphp
-
-                        <i class="ti {{ $iconClass }} ti-md text-primary me-4"></i>
-                        <span class="fw-medium">{{ $value->name }}</span>
-                    </td>
+                    <td>{{ $value->id }}</td>
+                    <td>{{ $value->name }}</td>
                     <td>{{ $value->email }}</td>
                     <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
-                    <td><span class="badge bg-label-primary me-1">Active</span></td>
+                   <td>
+                        @if($value->status == 0)
+                            <span class="badge bg-label-primary">Active</span>
+                        @else
+                            <span class="badge bg-label-danger">Inactive</span>
+                        @endif
+                    </td>
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

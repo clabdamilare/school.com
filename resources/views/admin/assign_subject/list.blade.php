@@ -154,13 +154,13 @@
                     <td>{{ $value->class_name }}</td>
                     <td>{{ $value->subject_name }}</td>
 
-                    <td>
+                      <td>
                         @if($value->status == 0)
-                        Active
+                            <span class="badge bg-label-primary">Active</span>
                         @else
-                         Inactive
+                            <span class="badge bg-label-danger">Inactive</span>
                         @endif
-                        </td>
+                    </td>
                     <td>{{ $value->created_by_name }}</td>
                     <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                     <td>
@@ -178,7 +178,7 @@
                                 <form action="{{ url('admin/assign_subject/delete/' . $value->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="dropdown-item waves-effect" onclick="return confirm('Are you sure you want to delete this subject?');">
+                                    <button type="submit" class="dropdown-item waves-effect" onclick="return confirm('Are you sure you want to delete this Assign Subject?');">
                                         <i class="ti ti-trash me-1"></i> Delete
                                     </button>
                                 </form>
