@@ -3,65 +3,15 @@
 @section('content')
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
-
-<!-- SweetAlert CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Check for Session Message -->
-@if(session('success'))
-    <script>
-        Swal.fire({
-            title: "Success!",
-            text: "{{ session('success') }}",
-            icon: "success",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
-
-@if(session('error'))
-    <script>
-        Swal.fire({
-            title: "Error!",
-            text: "{{ session('error') }}",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
-
-@if(session('warning'))
-    <script>
-        Swal.fire({
-            title: "Warning!",
-            text: "{{ session('warning') }}",
-            icon: "warning",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
-
-@if(session('info'))
-    <script>
-        Swal.fire({
-            title: "Information",
-            text: "{{ session('info') }}",
-            icon: "info",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
-
-@if(session('delete'))
-    <script>
-        Swal.fire({
-            title: "Deleted!",
-            text: "{{ session('delete') }}",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
+    <style>
+        .custom-btn-width {
+        width: 130px; /* Adjust as needed */
+        }
+        .custom-card {
+        min-height: 80px; /* Adjust height as needed */
+        margin: 0 auto; /* Centers it */
+        }
+    </style>
 
 <div class="card mb-6">  <!-- Add mb-4 for spacing -->
     <div class="d-flex justify-content-between align-items-center">
@@ -117,20 +67,6 @@
 
 </div>
  <!-- End of Form Card -->
- <style>
-    .custom-btn-width {
-        width: 130px; /* Adjust as needed */
-    }
-</style>
-
-
-<style>
-.custom-card {
-
-    min-height: 80px; /* Adjust height as needed */
-    margin: 0 auto; /* Centers it */
-}
-</style>
 
 
 <!-- Table Section -->
@@ -179,7 +115,7 @@
                                         <button type="submit" class="dropdown-item waves-effect" onclick="return confirm('Are you sure you want to delete this subject?');">
                                             <i class="ti ti-trash me-1"></i> Delete
                                         </button>
-                                    </form>  
+                                    </form>
                                 </div>
                             </div>
                         </td>

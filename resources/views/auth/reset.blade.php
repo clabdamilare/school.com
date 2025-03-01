@@ -8,6 +8,79 @@
   data-assets-path="{{ url('backend/assets/') }}/"
   data-template="horizontal-menu-template"
   data-style="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          let isDarkMode = document.documentElement.getAttribute('data-style') === 'dark';
+          let swalOptions = {
+              background: isDarkMode ? "#1e1e1e" : "#fff", // Dark mode background
+              color: isDarkMode ? "#fff" : "#000" // Text color
+          };
+
+          @if ($errors->any())
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  html: '{!! implode("<br>", $errors->all()) !!}',
+                  confirmButtonText: 'OK',
+                  ...swalOptions
+              });
+          @endif
+
+          @if(session('success'))
+              Swal.fire({
+                  title: "Success!",
+                  text: "{{ session('success') }}",
+                  icon: "success",
+                  confirmButtonText: "OK",
+                  ...swalOptions
+              });
+          @endif
+
+          @if(session('error'))
+              Swal.fire({
+                  title: "Error!",
+                  text: "{{ session('error') }}",
+                  icon: "error",
+                  confirmButtonText: "OK",
+                  ...swalOptions
+              });
+          @endif
+
+          @if(session('warning'))
+              Swal.fire({
+                  title: "Warning!",
+                  text: "{{ session('warning') }}",
+                  icon: "warning",
+                  confirmButtonText: "OK",
+                  ...swalOptions
+              });
+          @endif
+
+          @if(session('info'))
+              Swal.fire({
+                  title: "Information",
+                  text: "{{ session('info') }}",
+                  icon: "info",
+                  confirmButtonText: "OK",
+                  ...swalOptions
+              });
+          @endif
+
+          @if(session('delete'))
+              Swal.fire({
+                  title: "Deleted!",
+                  text: "{{ session('delete') }}",
+                  icon: "error",
+                  confirmButtonText: "OK",
+                  ...swalOptions
+              });
+          @endif
+      });
+  </script>
+
   <head>
     <meta charset="utf-8" />
     <meta

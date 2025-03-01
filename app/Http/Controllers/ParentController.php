@@ -8,17 +8,17 @@ use Hash;
 use Auth;
 use Str;
 
-class ParentController extends Controller  
+class ParentController extends Controller
 {
 
          public function list(){
 
         $data['getRecord'] = User::getParent();
-        $data['header_title'] = 
+        $data['header_title'] =
         "Parent List";
         return view('admin.parent.list', $data);
-    }       
-    
+    }
+
     public function add()
     {
 
@@ -61,7 +61,7 @@ class ParentController extends Controller
             $student->password    = Hash::make($request->password);
             $student->user_type   = 4;
             $student->save();
-            
+
             return redirect('admin/parent/list')->with('success', 'Parent Successfully Created');
 
 
@@ -74,7 +74,7 @@ public function edit($id)
         if(!empty($data['getRecord']))
 
         {
-                
+
                 $data['header_title'] = "Edit Parent";
                 return view('admin.parent.edit', $data);
 
@@ -191,6 +191,20 @@ public function update($id, Request $request)
 
     return redirect()->back()->with('success', "Student Successfully Assign Deleted");
 }
+
+
+// parent side
+
+        public function myStudentParent()
+        {
+
+                    $id = Auth::user()->id;
+                    $data['getRecord'] = User::getMyStudent($id);
+
+                    $data['header_title'] = "My Student";
+                    return view('parent.my_student', $data);
+
+        }
 
 
 }

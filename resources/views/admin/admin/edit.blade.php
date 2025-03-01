@@ -3,7 +3,6 @@
 @section('content')
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <div class="col-xl mb-6">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -43,16 +42,7 @@
             </div>
         </div>
     </div>
-    @if ($errors->any())
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: '{!! implode("<br>", $errors->all()) !!}',
-            confirmButtonText: 'OK'
-        });
-    </script>
-@endif
+
     {{-- <script>
         document.getElementById("basic-default-email").addEventListener("input", function() {
             // Remove @gmail.com if user tries to type it

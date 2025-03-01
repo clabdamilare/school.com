@@ -4,25 +4,12 @@
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
 
-<!-- SweetAlert CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- Check for Session Message -->
-@if(session('success'))
-    <script>
-        Swal.fire({
-            title: "Success!",
-            text: "{{ session('success') }}",
-            icon: "success",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
 
 <div class="card mb-6">  <!-- Add mb-4 for spacing -->
     <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-header m-0">Parent Student List ( {{ $getParent->name }} {{ $getParent->last_name }})</h5>
-        
+
     </div>
 </div>  <!-- Closing first card -->
 
@@ -61,7 +48,7 @@
                            value="{{ Request::get('email') }}" class="form-control" placeholder="Email">
                 </div>
 
-               
+
 
                 <!-- Buttons aligned properly -->
                 <div class="col-md-2 d-flex align-items-end gap-2">
@@ -90,7 +77,7 @@
     <div class="table-responsive text-nowrap">
      <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-header m-0"> Student List </h5>
-        
+
     </div>
         <table class="table">
             <thead>
@@ -105,8 +92,8 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-            
-            
+
+
              @foreach($getSearchStudent as $value)
                 <tr>
                     <td>{{ $value->id }}</td>
@@ -132,7 +119,7 @@
                                 <a class="dropdown-item waves-effect" href="{{ url('admin/parent/assign_student_parent/' . $value->id.'/' .$parent_id) }}">
                                     <i class="ti ti-pencil me-1"></i> Add Student To Parent
                                 </a>
-                              
+
                             </div>
                         </div>
                     </td>
@@ -150,7 +137,7 @@
     <div class="table-responsive text-nowrap">
      <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-header m-0">Parent Student List</h5>
-        
+
     </div>
        <table class="table">
             <thead>
@@ -165,8 +152,8 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-            
-            
+
+
              @foreach($getRecord as $value)
                 <tr>
                     <td>{{ $value->id }}</td>
@@ -192,7 +179,7 @@
                                 <a class="dropdown-item waves-effect" href="{{ url('admin/parent/assign_student_parent_delete/' . $value->id) }}">
                                     <i class="ti ti-pencil me-1"></i> Delete
                                 </a>
-                              
+
                             </div>
                         </div>
                     </td>
@@ -207,6 +194,6 @@
 </div>
 
 
-      
+
 
 @endsection

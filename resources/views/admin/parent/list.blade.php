@@ -4,20 +4,6 @@
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
 
-<!-- SweetAlert CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Check for Session Message -->
-@if(session('success'))
-    <script>
-        Swal.fire({
-            title: "Success!",
-            text: "{{ session('success') }}",
-            icon: "success",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
 
 <div class="card mb-6">  <!-- Add mb-4 for spacing -->
     <div class="d-flex justify-content-between align-items-center">
@@ -56,7 +42,7 @@
                            value="{{ Request::get('email') }}" class="form-control" placeholder="Email">
                 </div>
 
-               
+
 
                 <div class="col-md-2 col-sm-4">
                     <label class="form-label" for="formValidationClass">Gender</label>
@@ -154,7 +140,7 @@
                     <td>{{ $value->mobile_number }}</td>
                     <td>{{ $value->occupation }}</td>
                     <td>{{ $value->address }}</td>
-                    
+
                        <td>
                         @if($value->status == 0)
                             <span class="badge bg-label-primary">Active</span>

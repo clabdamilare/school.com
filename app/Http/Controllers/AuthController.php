@@ -40,34 +40,35 @@ return view('auth.login');
     }
 
     public function AuthLogin(Request $request)
-{
-    $remember = !empty($request->remember) ? true : false;
+    {
+        // Validate the request
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
-    if(Auth::attempt(['email' => $request->email, 'password' => $request->password], true))
-{
-    if(Auth::user()->user_type == 1)
-{
-    return redirect('admin/dashboard');
-}
-else if(Auth::user()->user_type == 2)
-{
-    return redirect('teacher/dashboard');
-}
-else if(Auth::user()->user_type == 3)
-{
-    return redirect('student/dashboard');
-}
-else if(Auth::user()->user_type == 4)
-{
-    return redirect('parent/dashboard');
-}
-}
-else
-{
-    return redirect()->back()->with('error', 'Please enter currect email and password');
-}
+        $remember = $request->has('remember');
 
-}
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+            $user = Auth::user();
+
+            // Map user_type to correct lowercase routes
+            $routes = [
+                1 => 'admin',
+                2 => 'teacher',
+                3 => 'student',
+                4 => 'parent'
+            ];
+
+            $role = $routes[$user->user_type] ?? 'user'; // Default to 'user' if not found
+
+            // Redirect to the correct route in lowercase
+            return redirect("$role/dashboard")->with('success', "Welcome, $role {$user->name}!");
+        } else {
+            return redirect()->back()->with('error', 'Invalid email or password.');
+        }
+    }
+
 
 public function forgotPassword()
 {

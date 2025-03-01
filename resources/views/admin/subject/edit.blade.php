@@ -3,7 +3,6 @@
 @section('content')
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="col-xl mb-6">
         <div class="card">
@@ -30,7 +29,8 @@
 
                             <div class="mb-6">
                                 <label class="form-label" for="basic-default-fullname">Subject Type </label>
-                                <select class="form-control" name="type" required>
+                                <select id="formtabs-country" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" data-select2-id="formtabs-country" tabindex="-1" aria-hidden="true"
+                                class="form-control" name="type" required>
                                     <option value="">Select Subject</option>
                                     <option {{ ($getRecord->type == 'Theory') ? 'selected' : '' }}  value="Theory">Theory</option>
                                     <option {{ ($getRecord->type == 'Practical') ? 'selected' : '' }}  value="Practical">Practical</option>
@@ -40,7 +40,8 @@
 
                     <div class="mb-6">
                         <label class="form-label" for="basic-default-fullname">Status</label>
-                        <select class="form-control" name="status">
+                        <select id="formtabs-country" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" data-select2-id="formtabs-country" tabindex="-1" aria-hidden="true"
+                        class="form-control" name="status">
                             <option {{ ($getRecord->Status == 0) ? 'selected' : '' }}  value="0">Active</option>
                             <option {{ ($getRecord->Status == 1) ? 'selected' : '' }}  value="1">Inactive</option>
                           </select>
@@ -55,15 +56,6 @@
     </div>
 
 
-    @if ($errors->any())
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: '{!! implode("<br>", $errors->all()) !!}',
-            confirmButtonText: 'OK'
-        });
-    </script>
-@endif
+
 
 @endsection

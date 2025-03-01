@@ -109,11 +109,13 @@ public function update(Request $request)
 
 public function delete($id)
 {
-    $save = SubjectModel::getSingle($id);
-    $save->is_delete = 1;
-    $save->save();
 
-    return redirect()->back()->with('info', "Subject Successfully Deleted");
+            $save = ClassSubjectModel::getSingle($id);
+            $save->is_delete = 1;
+            $save->save();
+
+            return redirect()->back()->with('success', 'Assign Subject Successfully Deleted');
+
 }
 
 public function edit_single($id)

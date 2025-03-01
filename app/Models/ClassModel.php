@@ -34,7 +34,7 @@ class ClassModel extends Model
 
             $return = $return->where('class.is_delete', '=', 0)
             ->orderBy('class.id', 'desc')
-            ->paginate(20);
+            ->paginate(10);
             return $return;
         }
 

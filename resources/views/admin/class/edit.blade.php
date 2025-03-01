@@ -3,7 +3,6 @@
 @section('content')
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="col-xl mb-6">
         <div class="card">
@@ -29,7 +28,8 @@
 
                     <div class="mb-6">
                         <label class="form-label" for="basic-default-fullname">Status</label>
-                        <select class="form-control" name="status">
+                        <select id="formtabs-country" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" data-select2-id="formtabs-country" tabindex="-1" aria-hidden="true"
+                        class="form-control" name="status">
                             <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Active</option>
                             <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Inactive</option>
                           </select>
@@ -44,33 +44,4 @@
     </div>
 
 
-    @if ($errors->any())
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: '{!! implode("<br>", $errors->all()) !!}',
-            confirmButtonText: 'OK'
-        });
-    </script>
-@endif
-    <script>
-        document.getElementById("basic-default-email").addEventListener("input", function() {
-            // Remove @gmail.com if user tries to type it
-            this.value = this.value.replace(/@gmail\.com/i, "");
-        });
-
-        document.querySelector("form").addEventListener("submit", function(event) {
-            let emailField = document.getElementById("basic-default-email");
-            let emailValue = emailField.value.trim();
-
-            // Check if email already ends with @gmail.com
-            if (!emailValue.endsWith("@gmail.com")) {
-                emailField.value = emailValue + "@gmail.com";
-            } else {
-                // Remove any additional @gmail.com just in case
-                emailField.value = emailValue.replace(/@gmail\.com/gi, "") + "@gmail.com";
-            }
-        });
-    </script>
 @endsection

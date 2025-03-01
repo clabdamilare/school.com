@@ -4,20 +4,13 @@
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
 
-<!-- SweetAlert CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .custom-card {
+        min-height: 80px;
+        margin: 0 auto;
+        }
+    </style>
 
-<!-- Check for Session Message -->
-@if(session('success'))
-    <script>
-        Swal.fire({
-            title: "Success!",
-            text: "{{ session('success') }}",
-            icon: "success",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
 
 <div class="card mb-6">  <!-- Add mb-4 for spacing -->
     <div class="d-flex justify-content-between align-items-center">
@@ -56,7 +49,7 @@
                            value="{{ Request::get('email') }}" class="form-control" placeholder="Email">
                 </div>
 
-            
+
 
                 <div class="col-md-2 col-sm-4">
                     <label class="form-label" for="formValidationClass">Gender</label>
@@ -87,7 +80,7 @@
                            value="{{ Request::get('address') }}" class="form-control" placeholder="Address">
                 </div>
 
-            
+
                 <div class="col-md-2 col-sm-4">
                     <label class="form-label" for="formValidationClass">Status</label>
                     <select id="formtabs-country" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" data-select2-id="formtabs-country" tabindex="-1" aria-hidden="true" class="form-control" name="status">
@@ -123,13 +116,6 @@
  <!-- End of Form Card -->
 
 
-<style>
-.custom-card {
-
-    min-height: 80px; /* Adjust height as needed */
-    margin: 0 auto; /* Centers it */
-}
-</style>
 
 
 <!-- Table Section -->

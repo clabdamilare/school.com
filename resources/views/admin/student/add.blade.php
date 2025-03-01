@@ -3,7 +3,6 @@
 @section('content')
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="col-xl mb-6">
         <div class="card">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SubjectModel;
+use App\Models\ClassSubjectModel;
+use App\Models\User;
 use Auth;
 
 class SubjectController extends Controller
@@ -77,6 +79,29 @@ public function update($id, Request $request)
 
         return redirect()->back()->with('info', "Subject Successfully Deleted");
     }
+
+    // student part
+
+    public function MySubject()
+        {
+
+            $data['getRecord'] = ClassSubjectModel::MySubject(Auth::user()->class_id);
+
+        $data['header_title'] = "My Subject";
+        return view('student.my_subject', $data);
+
+        }
+
+        // parent side
+
+        public function ParentStudentSubject($student_id)
+        {
+            $user = User::getSingle($student_id);
+            $data['getUser'] = $user;
+            $data['getRecord'] = ClassSubjectModel::MySubject($user->class_id);
+            $data['header_title'] = "Student Subject";
+            return view('parent.my_student_subject', $data);
+        }
 
 
 }

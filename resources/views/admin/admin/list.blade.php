@@ -4,20 +4,6 @@
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
 
-<!-- SweetAlert CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Check for Session Message -->
-@if(session('success'))
-    <script>
-        Swal.fire({
-            title: "Success!",
-            text: "{{ session('success') }}",
-            icon: "success",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
 
 <div class="card mb-6">  <!-- Add mb-4 for spacing -->
     <div class="d-flex justify-content-between align-items-center">

@@ -47,61 +47,42 @@
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
-<!-- SweetAlert CDN -->
+
+
+    <!-- SweetAlert CDN -->
+
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Check for Session Message -->
-@if(session('success'))
+@if ($sweetalert)
     <script>
-        Swal.fire({
-            title: "Success!",
-            text: "{{ session('success') }}",
-            icon: "success",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
+        document.addEventListener("DOMContentLoaded", function () {
+            let isDarkMode = document.documentElement.getAttribute('data-style') === 'dark';
+            let swalOptions = {
+                background: isDarkMode ? "#25293c" : "#fff",
+                color: isDarkMode ? "#fff" : "#000"
+            };
 
-@if(session('error'))
-    <script>
-        Swal.fire({
-            title: "Error!",
-            text: "{{ session('error') }}",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
+            @if (!empty($sweetalert['errors']) && count($sweetalert['errors']) > 0)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: '{!! implode("<br>", $sweetalert["errors"]->all()) !!}',
+                    confirmButtonText: 'OK',
+                    ...swalOptions
+                });
+            @endif
 
-@if(session('warning'))
-    <script>
-        Swal.fire({
-            title: "Warning!",
-            text: "{{ session('warning') }}",
-            icon: "warning",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
-
-@if(session('info'))
-    <script>
-        Swal.fire({
-            title: "Information",
-            text: "{{ session('info') }}",
-            icon: "info",
-            confirmButtonText: "OK"
-        });
-    </script>
-@endif
-
-@if(session('delete'))
-    <script>
-        Swal.fire({
-            title: "Deleted!",
-            text: "{{ session('delete') }}",
-            icon: "error",
-            confirmButtonText: "OK"
+            @foreach (['success', 'error', 'warning', 'info', 'delete'] as $type)
+                @if (!empty($sweetalert[$type]))
+                    Swal.fire({
+                        title: "{{ ucfirst($type) }}!",
+                        text: "{{ $sweetalert[$type] }}",
+                        icon: "{{ $type === 'delete' ? 'error' : $type }}",
+                        confirmButtonText: 'OK',
+                        ...swalOptions
+                    });
+                @endif
+            @endforeach
         });
     </script>
 @endif
@@ -118,6 +99,8 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('backend/assets/js/config.js')}}"></script>
+
+    @yield('style')
   </head>
 
   <body>
@@ -183,5 +166,11 @@
 
     <!-- Page JS -->
     <script src="{{asset('backend/assets/js/dashboards-crm.js')}}"></script>
+
+<!-- Load FullCalendar from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+<!-- Ensure all pages can inject scripts -->
+@yield('script')
   </body>
 </html>

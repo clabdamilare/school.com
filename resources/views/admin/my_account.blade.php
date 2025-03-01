@@ -3,23 +3,6 @@
 @section('content')
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @if(session('success'))
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                let isDarkMode = document.documentElement.getAttribute('data-style') === 'dark';
-
-                Swal.fire({
-                    title: "Success!",
-                    text: "{{ session('success') }}",
-                    icon: "success",
-                    confirmButtonText: "OK",
-                    background: isDarkMode ? "#25293c" : "#fff", // Dark mode background
-                    color: isDarkMode ? "#fff" : "#000" // Text color
-                });
-            });
-        </script>
-    @endif
 
     <div class="col-xl mb-6">
         <div class="card">
@@ -51,25 +34,7 @@
             </div>
         </div>
     </div>
-    @if ($errors->any())
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: '{!! implode("<br>", $errors->all()) !!}',
-            confirmButtonText: 'OK'
-        });
-    </script>
-@endif
-    {{-- <script>
-        document.getElementById("basic-default-email").addEventListener("input", function() {
-            // Remove @gmail.com if user tries to type it
-            this.value = this.value.replace(/@gmail\.com/i, "");
-        });
 
-        document.querySelector("form").addEventListener("submit", function(event) {
-            let emailField = document.getElementById("basic-default-email");
-            emailField.value = emailField.value.trim() + "@gmail.com"; // Ensure @gmail.com is added before submission
-        });
-    </script> --}}
+
+
 @endsection

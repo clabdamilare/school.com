@@ -3,7 +3,6 @@
 @section('content')
 <div class="content-wrapper">
 <div class="container-xxl flex-grow-1 container-p-y">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="col-xl mb-6">
         <div class="card">
@@ -26,9 +25,9 @@
                             <div style="color:red">{{ $errors->first('last_name') }}</div>
                         </div>
 
-                       
-                       
-{{-- 
+
+
+{{--
                         <div class="col-md-6 mb-3">
                             <label>Class <span style="color: red;">*</span></label>
                             <select id="formtabs-country" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" data-select2-id="formtabs-country" tabindex="-1" aria-hidden="true" class="form-control" required name="class_id">
@@ -51,7 +50,7 @@
                             <div style="color:red">{{ $errors->first('gender') }}</div>
                         </div>
 
-                      
+
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Occupation<span style="color: red;">*</span></label>
@@ -72,7 +71,7 @@
                             <div style="color:red">{{ $errors->first('address') }}</div>
                         </div>
 
-                    
+
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Profile Pic<span style="color: red;">*</span></label>
@@ -80,7 +79,7 @@
                             <div style="color:red">{{ $errors->first('profile_pic') }}</div>
                         </div>
 
-       
+
                         <div class="col-md-6 mb-3">
                             <label>Status<span style="color: red;">*</span></label>
                             <select id="formtabs-country" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" data-select2-id="formtabs-country" tabindex="-1" aria-hidden="true" class="form-control" required name="status">
@@ -126,16 +125,7 @@
     </div>
 
 
-    @if ($errors->any())
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: '{!! implode("<br>", $errors->all()) !!}',
-            confirmButtonText: 'OK'
-        });
-    </script>
-@endif
+
     <script>
         document.getElementById("basic-default-email").addEventListener("input", function() {
             // Remove @gmail.com if user tries to type it
